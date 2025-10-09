@@ -1,133 +1,217 @@
-# Taskly - Task Management Application
+# 📝 Taskly - Task Management Application
 
-A full-stack task management application built with React frontend and Express.js backend.
+A modern, full-stack task management application built with React and Node.js, featuring drag-and-drop functionality, rich text editing, and real-time updates.
 
-## Features
+## ✨ Features
 
-- **User Authentication**: Sign up and sign in functionality
-- **Task Management**: Create, read, update, and delete tasks
-- **Drag & Drop**: Reorder tasks with drag and drop functionality
-- **Rich Text Editor**: Create detailed task descriptions with rich text formatting
-- **File Attachments**: Attach files to tasks
-- **Subtasks**: Break down tasks into smaller subtasks
-- **Recurring Tasks**: Set up recurring tasks with different frequencies
-- **Task Templates**: Create and use task templates for common workflows
-- **Advanced Filters**: Filter tasks by various criteria
-- **Notifications**: Get notified about task deadlines and updates
-- **Dark/Light Theme**: Toggle between dark and light themes
-- **Keyboard Shortcuts**: Use keyboard shortcuts for quick actions
+- 🎯 **Task Management**: Create, update, delete, and organize tasks
+- 🎨 **Drag & Drop**: Intuitive drag-and-drop interface for task organization
+- 📝 **Rich Text Editor**: Advanced text editing with formatting options
+- 🏷️ **Categories & Priorities**: Organize tasks with categories and priority levels
+- 📎 **File Attachments**: Attach files to tasks
+- 🔄 **Recurring Tasks**: Set up recurring tasks with custom schedules
+- 📱 **Responsive Design**: Works seamlessly on desktop and mobile
+- 🌙 **Dark/Light Theme**: Toggle between themes
+- ⌨️ **Keyboard Shortcuts**: Power user shortcuts for efficiency
+- 🔔 **Notifications**: Stay updated with task notifications
 
-## Tech Stack
-
-### Frontend
-- React 18
-- Redux Toolkit for state management
-- React Router for navigation
-- React Quill for rich text editing
-- @dnd-kit for drag and drop functionality
-- Axios for API calls
-- React Toastify for notifications
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB with Mongoose
-- bcryptjs for password hashing
-- CORS for cross-origin requests
-- Multer for file uploads
-
-## Project Structure
+## 🏗️ Architecture
 
 ```
 Taskly/
-├── api/                    # API endpoints
-├── conn/                   # Database connection
-├── frontend/              # React frontend
+├── backend/          # Node.js/Express API
+│   ├── api/         # API endpoints
+│   ├── conn/        # Database connection
+│   ├── models/      # MongoDB models
+│   ├── routes/      # Express routes
+│   └── app.js       # Main server file
+├── frontend/         # React Application
 │   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── contexts/      # React contexts
-│   │   ├── hooks/         # Custom hooks
-│   │   └── store/         # Redux store
-├── models/                # MongoDB models
-├── routes/                # Express routes
-└── app.js                 # Main server file
+│   │   ├── components/  # React components
+│   │   ├── config/      # API configuration
+│   │   ├── contexts/    # React contexts
+│   │   ├── hooks/       # Custom hooks
+│   │   └── store/       # Redux store
+│   └── public/      # Static assets
+└── DEPLOYMENT_GUIDE.md
 ```
 
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v18 or higher)
+
+- Node.js 18+ 
 - MongoDB (local or Atlas)
 - npm or yarn
 
-### Installation
+### Local Development
 
-1. Clone the repository:
-```bash
-git clone https://github.com/Shree-ux/Taskly.git
-cd Taskly
-```
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd Taskly
+   ```
 
-2. Install backend dependencies:
-```bash
-npm install
-```
+2. **Run the setup script:**
+   ```bash
+   ./setup.sh
+   ```
 
-3. Install frontend dependencies:
-```bash
-cd frontend
-npm install
-cd ..
-```
+3. **Set up environment variables:**
+   
+   **Backend (.env):**
+   ```env
+   NODE_ENV=development
+   MONGODB_URI=mongodb://localhost:27017/taskly
+   FRONTEND_URL=http://localhost:3000
+   ```
 
-4. Set up environment variables:
-Create a `.env` file in the root directory:
-```
-MONGODB_URI=your_mongodb_connection_string
-NODE_ENV=development
-PORT=1000
-```
+   **Frontend (.env):**
+   ```env
+   REACT_APP_API_URL=http://localhost:1000
+   ```
 
-5. Start the backend server:
-```bash
-npm start
-```
+4. **Start the applications:**
+   
+   **Backend:**
+   ```bash
+   cd backend
+   npm start
+   ```
+   
+   **Frontend:**
+   ```bash
+   cd frontend
+   npm start
+   ```
 
-6. Start the frontend development server:
-```bash
-cd frontend
-npm start
-```
+5. **Access the application:**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:1000
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:1000
+## 🛠️ Technology Stack
 
-## API Endpoints
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **bcryptjs** - Password hashing
+- **CORS** - Cross-origin resource sharing
+- **Multer** - File upload handling
+
+### Frontend
+- **React 18** - UI library
+- **Redux Toolkit** - State management
+- **React Router** - Routing
+- **@dnd-kit** - Drag and drop
+- **React Quill** - Rich text editor
+- **Axios** - HTTP client
+- **React Toastify** - Notifications
+
+## 📦 API Endpoints
 
 ### Authentication
 - `POST /api/v1/register` - User registration
 - `POST /api/v1/signin` - User login
 
 ### Tasks
-- `GET /api/v2/tasks` - Get all tasks
-- `POST /api/v2/tasks` - Create a new task
-- `PUT /api/v2/tasks/:id` - Update a task
-- `DELETE /api/v2/tasks/:id` - Delete a task
+- `GET /api/v2/getTasks/:userId` - Get user tasks
+- `POST /api/v2/addTask` - Create new task
+- `PUT /api/v2/updateTask/:id` - Update task
+- `DELETE /api/v2/deleteTask/:id` - Delete task
+- `PATCH /api/v2/toggleTask/:id` - Toggle task completion
 
-## Deployment
+### Categories & Filters
+- `GET /api/v2/categories/:userId` - Get task categories
+- `GET /api/v2/tasksByPriority/:userId/:priority` - Filter by priority
+- `GET /api/v2/overdueTasks/:userId` - Get overdue tasks
 
-The project is configured for deployment on Vercel with the included `vercel.json` configuration file.
+### Subtasks
+- `POST /api/v2/addSubtask/:taskId` - Add subtask
+- `PATCH /api/v2/toggleSubtask/:taskId/:subtaskId` - Toggle subtask
+- `DELETE /api/v2/deleteSubtask/:taskId/:subtaskId` - Delete subtask
 
-## Contributing
+### Attachments
+- `POST /api/v2/uploadAttachment` - Upload file
+- `GET /api/v2/downloadAttachment/:id` - Download file
+- `DELETE /api/v2/deleteAttachment/:id` - Delete file
+
+## 🚀 Deployment
+
+This project is configured for separate backend and frontend deployments. See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions.
+
+### Quick Deployment Options
+
+**Backend:**
+- Railway (Recommended)
+- Render
+- Heroku
+- Docker
+
+**Frontend:**
+- Vercel (Recommended)
+- Netlify
+
+## 🧪 Testing
+
+```bash
+# Backend tests
+cd backend
+npm test
+
+# Frontend tests
+cd frontend
+npm test
+```
+
+## 📱 Mobile Support
+
+The application is fully responsive and works on:
+- Desktop browsers
+- Tablet devices
+- Mobile phones
+- Progressive Web App (PWA) support
+
+## ⌨️ Keyboard Shortcuts
+
+- `Ctrl/Cmd + N` - New task
+- `Ctrl/Cmd + S` - Save task
+- `Ctrl/Cmd + D` - Delete task
+- `Ctrl/Cmd + F` - Focus search
+- `Esc` - Close modals
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Commit your changes
-5. Push to the branch
-6. Create a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the ISC License.
+
+## 🆘 Support
+
+If you encounter any issues:
+
+1. Check the [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+2. Review the troubleshooting section
+3. Check the application logs
+4. Verify environment variables
+
+## 🎯 Roadmap
+
+- [ ] Real-time collaboration
+- [ ] Team workspaces
+- [ ] Advanced analytics
+- [ ] Mobile app
+- [ ] API rate limiting
+- [ ] Email notifications
+- [ ] Calendar integration
+
+---
+
+**Built with ❤️ using React and Node.js**

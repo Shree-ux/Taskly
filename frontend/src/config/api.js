@@ -1,6 +1,6 @@
 // API Configuration
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.REACT_APP_API_URL || 'https://todo-list-eta-gold.vercel.app' // Updated with your actual Vercel URL
+  ? process.env.REACT_APP_API_URL || 'https://taskly-backend-production.up.railway.app' // Updated with your actual backend URL
   : 'http://localhost:1000'; // Use localhost in development
 
 export const API_ENDPOINTS = {
